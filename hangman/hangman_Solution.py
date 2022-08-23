@@ -4,6 +4,7 @@ The prints have to contain the same text as indicated, don't add any more prints
 or you will get 0 for this assignment.
 '''
 import random
+import sys
 
 class Hangman:
     '''
@@ -46,14 +47,35 @@ class Hangman:
         self.word_list = word_list
         self.num_lives = num_lives
         self.word = random.choice(word_list)
-        print(f'The mystery word has {len(self.word)} characters')
+        print(f"The mystery word has {len(self.word)} characters")
         self.word_guessed= []
         for letters in (self.word):
             self.word_guessed.append('_')
-            print(self.word_guessed)
-            self.num_letters = len(set(self.word))
-            self.list_letters = []
-    def check_letter(self, letter) -> None:
+        print(self.word_guessed)
+        self.num_letters = len(set(self.word))
+        self.list_letters = []
+
+    def ask_letter(self) :
+        '''
+        Asks the user for a letter and checks two things:
+        1. If the letter has already been tried
+        2. If the character is a single character
+        If it passes both checks, it calls the check_letter method.
+        '''
+        while True:
+            self.letter = input("Enter a single letter: ")
+            if len(self.letter) > 1:
+                print("Please, enter just one character")
+            elif self.letter.isalpha() is False:
+                print('Only alphabets please')
+            elif self.letter in self.list_letters:
+                print(f"{self.letter} was already tried, choose again")
+            elif len(self.letter) == 1:
+                break  
+            else:
+                print('Please, enter a chracter')
+        return self.letter
+    def check_letter(self) -> None :
         '''
         Checks if the letter is in the word.
         If it is, it replaces the '_' in the word_guessed list with the letter.
@@ -68,39 +90,27 @@ class Hangman:
         inputs= self.ask_letter()
         self.list_letters.append(inputs)
         for i, l in enumerate(self.word):
-            if inputs.lower() ==1:
-                self.word_guessed[i] =1
-                self.num_letters -=1
-                print(f'Nice! {letter} is in the word!')
-                print('_'.join(self.word_guessed))
-            elif inputs  not in self.word:
-                print(f'Sorry, {letter} is not in the word.')
-                self.list_letters.append(inputs)
-                self.num_lives -= 1
-                print(f'You have {num_lives} lives left.')
-                break
-            if '_' not in self.word_guessed:
-                print("congratulations! You've won.")
-                break
-            if self.num_lives == 0:
-                print(f'you ran out of lives, the word was {self.word}')
+         if inputs.lower() ==1:
+            self.word_guessed[i] =1
+            self.num_letters -=1
+            print(f'Nice! {inputs} is in the word!')
+            print('_'.join(self.word_guessed))
+         elif inputs  not in self.word:
+            print(f'Sorry, {inputs} is not in the word.')
+            self.list_letters.append(inputs)
+            self.num_lives -= 1
+            print(f'You have {self.num_lives} lives left.')
+            break
+        
+        
+         if '_' not in self.word_guessed:
+            print("congratulations! You've won.")
+            break
+        if self.num_lives == 0:
+            print(f'you ran out of lives, the word was {self.word}')
 
-    def ask_letter(self):
-        '''
-        Asks the user for a letter and checks two things:
-        1. If the letter has already been tried
-        2. If the character is a single character
-        If it passes both checks, it calls the check_letter method.
-        '''
-        while True:
-            self.letter = input("Enter a single letter : ")
-            if len(self.letter) > 1:
-                print("please, enter just one charecter")
-            elif self.letter in self.List_letters :
-                    print(f'{self.letter} was already tried')
-        return self.letter
-
-def play_game(word_list):
+ 
+def play_game(word_list) :
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
     while game.num_lives > 0 and game.num_letters > 0:
