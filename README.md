@@ -9,7 +9,7 @@
 ## Milestone 2
 - we have written the code in order to ask input from the user.
 ```python
-""" def ask_letter(self) :
+ def ask_letter(self) :
         '''
         while True:
             self.letter = input("Enter a single letter: ")
@@ -23,14 +23,14 @@
                 break  
             else:
                 print('Please, enter a chracter')
-        return self.letter"""
+        return self.letter
 ```
 
 ## Milestone 3
 
 - we have defined initializer in this milestone.
 ```python
-""" def __init__(self, word_list, num_lives=5):
+def __init__(self, word_list, num_lives=5):
         # 1. "The mystery word has {len(self.word)} characters" (The number of letters is NOT the UNIQUE number of letters)
         # 2. {word_guessed}
         self.word_list = word_list
@@ -43,12 +43,12 @@
         print(self.word_guessed)
         self.num_letters = len(set(self.word))
         self.list_letters = []
-"""
+
 ```
 ## Milestone 4
 - we have to check that user has given a valid input. which can be done by the following code.
 ```python 
-""" while True:
+while True:
             self.letter = input("Enter a single letter: ")
             if len(self.letter) > 1:
                 print("Please, enter just one character")
@@ -61,7 +61,6 @@
             else:
                 print('Please, enter a chracter')
         return self.letter
-"""
 ```
 - finally, the working of the finished project's game play output can be seen below,
 ```
