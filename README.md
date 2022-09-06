@@ -63,7 +63,7 @@
         return self.letter
 """
 ```
-- finally, the working of the finished project's game place output can be seen below,
+- finally, the working of the finished project's game play output can be seen below,
 ```
 The mystery word has 5 characters
 ['_', '_', '_', '_', '_']
